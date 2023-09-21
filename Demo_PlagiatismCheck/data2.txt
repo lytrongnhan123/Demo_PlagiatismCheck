@@ -1,0 +1,21 @@
+Elaboration: There is a third approach to the control hazard, called delayed decision. 
+In our analogy, whenever you are going to make such a decision about laundry, just place 
+a load of nonfootball clothes in the washer while waiting for football uniforms to dry. As 
+long as you have enough dirty clothes that are not affected by the test, this solution 
+works fi ne.
+Called the delayed branch in computers, and mentioned above, this is the solution 
+actually used by the MIPS architecture. The delayed branch always executes the next 
+sequential instruction, with the branch taking place after that one instruction delay. 
+It is hidden from the MIPS assembly language programmer because the assembler 
+can automatically arrange the instructions to get the branch behavior desired by the 
+programmer. MIPS software will place an instruction immediately after the delayed 
+branch instruction that is not affected by the branch, and a taken branch changes 
+the address of the instruction that follows this safe instruction. In our example, the 
+add instruction before the branch in Figure 4.31 does not affect the branch and can 
+be moved after the branch to fully hide the branch delay. Since delayed branches are 
+useful when the branches are short, no processor uses a delayed branch of more 
+than one cycle. For longer branch delays, hardware-based branch prediction is usually 
+used.
+One popular approach to dynamic prediction of branches is keeping a history 
+for each branch as taken or untaken, and then using the recent past behavior 
+to predict the future.
